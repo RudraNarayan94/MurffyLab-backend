@@ -1,2 +1,11 @@
-fastapi 
+fastapi
 uvicorn
+murf
+pillow
+pytesseract
+pymupdf
+ollama
+python-multipart
+python-dotenv
+openai==0.28
+fitz

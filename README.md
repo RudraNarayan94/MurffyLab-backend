@@ -65,10 +65,9 @@ Kinkare-backend/
 ├── app/                    # Main application package
 │   ├── main.py             # FastAPI app initialization
 │   ├── config.py           # Configuration settings
-│   ├── routers/            # API endpoints
 │   ├── services/           # Business logic
 │   ├── models/             # Data models
-│   └── utils/              # Helper functions
+│
 ├── tests/                  # Test suite
 ├── .env                    # Environment variables (git-ignored)
 ├── .env.example            # Template for environment variables
@@ -81,6 +80,8 @@ Kinkare-backend/
 Start the development server:
 
 ```bash
+python -m uvicorn app.main:app --reload
+or
 uvicorn app.main:app --reload
 ```
 
@@ -115,5 +116,3 @@ pip freeze > requirements.txt
 ```
 
 ## License
-
-[Your License]

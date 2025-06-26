@@ -1,10 +1,10 @@
-
 import os, uuid
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
-from services.pdf_processor import extract_text_from_pdf, extract_patient_name, process_lab_report
-from services.murf_service import generate_audio
-from models.schemas import LabReportResponse
+from app.services.pdf_processor import extract_text_from_pdf, extract_patient_name, process_lab_report
+from app.services.murf_service import generate_audio
+from app.services.twilio_service import notify_recipient
+from app.models.schemas import LabReportResponse
 
 app = FastAPI()
 
@@ -34,6 +34,17 @@ async def upload_pdf(file: UploadFile = File(...)):
             parsed_json["audio_id"] = audio_id
         except Exception as err:
             parsed_json["audio_error"] = str(err)
+
+        try:
+            call_id = notify_recipient(
+                recipient_number="+917749825043",
+                twillo_number="+19787057379",
+                body=parsed_json["summary"]
+            )
+            # parsed_json["call_id"] = call_id
+        except Exception as err:
+            # parsed_json["call_error"] = str(err) 
+            print(err)      
 
         return JSONResponse(content=LabReportResponse(**parsed_json).model_dump())
 

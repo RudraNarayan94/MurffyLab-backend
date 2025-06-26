@@ -3,10 +3,10 @@ import pymupdf
 import pytesseract
 from PIL import Image
 import openai
-from config import GROQ_API_KEY, GROQ_MODEL
+from app.config import GROQ_API_KEY, GROQ_MODEL, GROQ_API_BASE
 
 openai.api_key = GROQ_API_KEY
-openai.api_base = "https://api.groq.com/openai/v1"
+openai.api_base = GROQ_API_BASE
 
 def extract_text_from_pdf(pdf_path: str) -> str:
     doc = pymupdf.open(pdf_path)
@@ -24,19 +24,19 @@ def extract_patient_name(text: str) -> str:
 
 def process_lab_report(text: str, patient_name: str):
     prompt = f"""
-You are a medical assistant. Analyze the following medical lab report.
+    You are a medical assistant. Analyze the following medical lab report.
 
-Return structured JSON with:
-- key_medical_terms: important terms (e.g., Hemoglobin, Glucose)
-- summary: speak directly to the patient, starting with \"Hello Mr. {patient_name}, ...\" (3-4 lines)
-- critical_observations: list of abnormal results or issues
-- precautions: friendly, clear advice for the patient
+    Return structured JSON with:
+    - key_medical_terms: important terms (e.g., Hemoglobin, Glucose)
+    - summary: speak directly to the patient, starting with \"Hello Mr. {patient_name}, ...\" (3-4 lines)
+    - critical_observations: list of abnormal results or issues
+    - precautions: friendly, clear advice for the patient
 
-Be conversational, simple, and helpful.
+    Be conversational, simple, and helpful.
 
-Lab Report Text:
-{text}
-"""
+    Lab Report Text:
+    {text}
+    """
     response = openai.ChatCompletion.create(
         model=GROQ_MODEL,
         messages=[{"role": "user", "content": prompt}],

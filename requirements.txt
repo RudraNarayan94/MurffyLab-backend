@@ -9,3 +9,4 @@ python-multipart
 python-dotenv
 openai==0.28
 fitz
+twilio

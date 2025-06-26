@@ -1,5 +1,4 @@
-
-from config import MURF_API_KEY
+from app.config import MURF_API_KEY
 from murf import Murf
 
 def generate_audio(summary: str, observations: list, precautions: str, voice_id="en-US-natalie"):

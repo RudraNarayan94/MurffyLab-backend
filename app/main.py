@@ -1,8 +1,6 @@
-
 from fastapi import FastAPI, File, UploadFile, Query
 from fastapi.responses import JSONResponse
 import os, uuid
-
 from app.services.pdf_processor import extract_text_from_pdf, extract_patient_name, process_lab_report
 from app.services.murf_service import generate_audio
 from app.services.twilio_service import notify_recipient

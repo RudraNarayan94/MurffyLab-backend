@@ -9,3 +9,15 @@ def generate_audio(summary: str, observations: list, precautions: str, voice_id=
     client = Murf(api_key=MURF_API_KEY)
     response = client.text_to_speech.generate(text=combined, voice_id=voice_id)
     return response.audio_file
+
+
+def translate_text(texts: list[str], target_language: str):
+    if not MURF_API_KEY:
+        raise Exception("MURF_API_KEY is missing")
+
+    client = Murf(api_key=MURF_API_KEY)
+    response = client.text.translate(
+        target_language=target_language,
+        texts=texts
+    )
+    return response.translations

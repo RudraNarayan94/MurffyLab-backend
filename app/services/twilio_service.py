@@ -22,4 +22,3 @@ def notify_recipient(recipient_number : str, twillo_number : str, body: str) -> 
     )
 
     return call.sid
-

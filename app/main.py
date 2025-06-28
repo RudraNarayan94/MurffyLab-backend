@@ -22,12 +22,8 @@ async def upload_pdf(file: UploadFile = File(...)):
     try:
         chat_id = str(uuid.uuid4())[:8].upper()
         text = extract_text_from_pdf(pdf_path)
-        print("text ", text)
         name = extract_patient_name(text)
-        print("name ", name)
         parsed_json, raw_output = process_lab_report(text, name)
-        print("parsed_json ", parsed_json)
-        print("raw_output ", raw_output)
 
         if raw_output:
             return JSONResponse(content={"chat_id": chat_id, "raw_output": raw_output})

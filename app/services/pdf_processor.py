@@ -7,7 +7,6 @@ from app.config import GROQ_API_KEY, GROQ_MODEL, GROQ_API_BASE
 
 openai.api_key = GROQ_API_KEY
 openai.api_base = GROQ_API_BASE
-
 def extract_text_from_pdf(pdf_path: str) -> str:
     doc = pymupdf.open(pdf_path)
     text = ""

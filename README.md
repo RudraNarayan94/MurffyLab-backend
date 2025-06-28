@@ -1,26 +1,53 @@
-# Kinkare Backend
+# 🔬 MurffyLab
 
-A FastAPI-based backend service for the Kinkare medical AI application.
+> Your lab reports. Finally explained.
 
-## Overview
+No more confusion, no more Googling medical terms. MurffyLab reads your report, explains it simply, and speaks it in your language. Upload once. Get clarity forever.
 
-This backend provides API endpoints for OCR processing, AI analysis, text-to-speech conversion, and communication services using FastAPI.
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Python](https://img.shields.io/badge/Python-3.12+-blue?style=for-the-badge&logo=python)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-## Prerequisites
+## 📋 Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Getting Started](#-getting-started)
+- [Project Structure](#-project-structure)
+- [API Documentation](#-api-documentation)
+- [Development](#-development)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+## 🌟 Overview
+
+MurffyLab is a FastAPI-based backend service for the Kinkare medical AI application. It simplifies complex medical reports by providing AI-powered analysis, text-to-speech conversion, and multilingual support.
+
+## ✨ Features
+
+- 📝 **OCR Processing**: Extract text from uploaded medical reports
+- 🧠 **AI Analysis**: Interpret medical terminology in plain language
+- 🔊 **Text-to-Speech**: Convert explanations to spoken audio
+- 💬 **Multilingual Support**: Understand reports in any language
+- 📱 **Communication Services**: SMS and call notifications via Twilio
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - Python 3.12+
 - Git for version control
 
-## Getting Started
+### Installation
 
-### 1. Clone the Repository
+1. **Clone the Repository**
 
 ```bash
 git clone https://github.com/RudraNarayan94/Kinkare-backend.git
 cd Kinkare-backend
 ```
 
-### 2. Set Up Virtual Environment
+2. **Set Up Virtual Environment**
 
 ```bash
 # Create virtual environment
@@ -31,18 +58,16 @@ python -m venv .venv
 
 # Activate on macOS/Linux
 source .venv/bin/activate
-
-source .venv/Scripts/activate
 ```
 
-### 3. Install Dependencies
+3. **Install Dependencies**
 
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables
+4. **Configure Environment Variables**
 
 ```bash
 cp .env.example .env
@@ -58,54 +83,92 @@ TWILIO_ACCOUNT_SID=your_account_sid
 TWILIO_AUTH_TOKEN=your_auth_token
 ```
 
-## Project Structure
+5. **Start the Application**
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Access the API at: http://localhost:8000
+
+## 📂 Project Structure
 
 ```
 Kinkare-backend/
 ├── app/                    # Main application package
 │   ├── main.py             # FastAPI app initialization
 │   ├── config.py           # Configuration settings
+│   ├── api/                # API endpoints
+│   │   ├── routes/         # Route definitions
+│   │   └── dependencies.py # Endpoint dependencies
 │   ├── services/           # Business logic
+│   │   ├── ocr.py          # OCR processing
+│   │   ├── analysis.py     # AI analysis
+│   │   ├── tts.py          # Text-to-speech
+│   │   └── communication.py # Twilio integration
 │   ├── models/             # Data models
-│
+│   │   ├── request.py      # Request schemas
+│   │   └── response.py     # Response schemas
+│   ├── core/               # Core functionality
+│   │   ├── security.py     # Authentication
+│   │   └── exceptions.py   # Custom exceptions
+│   └── utils/              # Utility functions
 ├── tests/                  # Test suite
+│   ├── conftest.py         # Test configuration
+│   ├── test_api/           # API tests
+│   └── test_services/      # Service tests
+├── scripts/                # Utility scripts
+├── docs/                   # Documentation
 ├── .env                    # Environment variables (git-ignored)
 ├── .env.example            # Template for environment variables
 ├── requirements.txt        # Dependencies
+├── requirements-dev.txt    # Development dependencies
+├── Dockerfile              # Container definition
+├── docker-compose.yml      # Container orchestration
 └── README.md               # This file
 ```
 
-## Running the Application
+## 📚 API Documentation
 
-Start the development server:
+Once the application is running, access the interactive API documentation:
+
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+
+### Key Endpoints
+
+| Endpoint             | Method | Description                             |
+| -------------------- | ------ | --------------------------------------- |
+| `/api/translate`     | POST   | Process and extract text from documents |
+| `/api/analysis`      | POST   | Analyze medical text with AI            |
+| `/api/tts`           | POST   | Convert text to speech audio            |
+| `/api/communication` | POST   | Send notifications via SMS/calls        |
+| `/health`            | GET    | Service health check                    |
+
+## 🛠️ Development
+
+### Running Tests
 
 ```bash
-python -m uvicorn app.main:app --reload
-or
-uvicorn app.main:app --reload
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Run tests
+pytest
+
+# Run tests with coverage
+pytest --cov=app
 ```
 
-Access the interactive API documentation:
-
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## API Endpoints
-
-The API provides the following main endpoints:
-
-- `/api/ocr` - Document OCR processing
-- `/api/analysis` - AI-based medical text analysis
-- `/api/tts` - Text-to-speech conversion
-- `/api/communication` - Twilio integration for calls/messaging
-
-## Development
-
-<!-- ### Running Tests
+### Code Quality
 
 ```bash
-pytest
-``` -->
+# Run linting
+flake8 app tests
+
+# Run type checking
+mypy app
+```
 
 ### Adding Dependencies
 
@@ -115,4 +178,20 @@ When adding new dependencies, update the requirements file:
 pip freeze > requirements.txt
 ```
 
-## License
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+Built with ❤️ by the MurffyLab Team

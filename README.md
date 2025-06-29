@@ -37,17 +37,47 @@ MurffyLab is a FastAPI-based backend service for the Kinkare medical AI applicat
 
 - Python 3.12+
 - Git for version control
+- Node.js 14+
+- npm or yarn
 
 ### Installation
 
-1. **Clone the Repository**
+**Clone the Repository**
 
 ```bash
-git clone https://github.com/RudraNarayan94/Kinkare-backend.git
-cd Kinkare-backend
+git clone https://github.com/RudraNarayan94/MurffyLab.git
+cd MurffyLab
 ```
 
-2. **Set Up Virtual Environment**
+### Frontend Setup
+
+1. **Navigate to Frontend Directory**
+
+```bash
+cd Frontend
+```
+
+2. **Install Dependencies**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. **Start Development Server**
+
+```bash
+npm start
+# or
+yarn start
+```
+
+Access the frontend at: http://localhost:3000
+
+### Backend Setup
+
+1. **Set Up Virtual Environment**
 
 ```bash
 # Create virtual environment
@@ -99,32 +129,25 @@ Kinkare-backend/
 │   ├── main.py             # FastAPI app initialization
 │   ├── config.py           # Configuration settings
 │   ├── api/                # API endpoints
-│   │   ├── routes/         # Route definitions
-│   │   └── dependencies.py # Endpoint dependencies
+│   │   └── routes/         # Route definitions
 │   ├── services/           # Business logic
 │   │   ├── ocr.py          # OCR processing
 │   │   ├── analysis.py     # AI analysis
 │   │   ├── tts.py          # Text-to-speech
 │   │   └── communication.py # Twilio integration
-│   ├── models/             # Data models
-│   │   ├── request.py      # Request schemas
-│   │   └── response.py     # Response schemas
-│   ├── core/               # Core functionality
-│   │   ├── security.py     # Authentication
-│   │   └── exceptions.py   # Custom exceptions
-│   └── utils/              # Utility functions
-├── tests/                  # Test suite
-│   ├── conftest.py         # Test configuration
-│   ├── test_api/           # API tests
-│   └── test_services/      # Service tests
-├── scripts/                # Utility scripts
-├── docs/                   # Documentation
+│   └── models/             # Data models
+├── Frontend/               # React frontend application
+│   ├── public/             # Static files
+│   ├── src/                # Source code
+│   │   ├── components/     # React components
+│   │   ├── pages/          # Page components
+│   │   ├── services/       # API services
+│   │   └── App.js          # Main application component
+│   └── package.json        # Frontend dependencies
 ├── .env                    # Environment variables (git-ignored)
 ├── .env.example            # Template for environment variables
-├── requirements.txt        # Dependencies
-├── requirements-dev.txt    # Development dependencies
+├── requirements.txt        # Backend dependencies
 ├── Dockerfile              # Container definition
-├── docker-compose.yml      # Container orchestration
 └── README.md               # This file
 ```
 
@@ -137,38 +160,19 @@ Once the application is running, access the interactive API documentation:
 
 ### Key Endpoints
 
-| Endpoint             | Method | Description                             |
-| -------------------- | ------ | --------------------------------------- |
-| `/api/translate`     | POST   | Process and extract text from documents |
-| `/api/analysis`      | POST   | Analyze medical text with AI            |
-| `/api/tts`           | POST   | Convert text to speech audio            |
-| `/api/communication` | POST   | Send notifications via SMS/calls        |
-| `/health`            | GET    | Service health check                    |
+| Endpoint     | Method | Description                             |
+| ------------ | ------ | --------------------------------------- |
+| `/upload`    | POST   | Process and extract text from documents |
+| `/analyze`   | POST   | Analyze medical text with AI            |
+| `/tts`       | POST   | Convert text to speech audio            |
+| `/translate` | POST   | Translate text to target language       |
 
 ## 🛠️ Development
 
-### Running Tests
-
-```bash
+````bash
 # Install development dependencies
 pip install -r requirements-dev.txt
 
-# Run tests
-pytest
-
-# Run tests with coverage
-pytest --cov=app
-```
-
-### Code Quality
-
-```bash
-# Run linting
-flake8 app tests
-
-# Run type checking
-mypy app
-```
 
 ### Adding Dependencies
 
@@ -176,7 +180,16 @@ When adding new dependencies, update the requirements file:
 
 ```bash
 pip freeze > requirements.txt
-```
+````
+
+## 👥 Meet the Team
+
+| 💻 Developer | 🌐 GitHub                                                           |
+| ------------ | ------------------------------------------------------------------- |
+| 👩‍💻 Akansha   | [akansh30](https://github.com/akansh30)                             |
+| 👨‍💻 Raj       | [rajiknows](http://github.com/rajiknows)                            |
+| 👨‍💻 Rudra     | [RudraNarayan94](https://github.com/RudraNarayan94)                 |
+| 👨‍💻 Swaraj    | [swaraj-mishra-22bcsb72](https://github.com/swaraj-mishra-22bcsb72) |
 
 ## 🤝 Contributing
 
